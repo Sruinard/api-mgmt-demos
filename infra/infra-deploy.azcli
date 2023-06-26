@@ -18,7 +18,6 @@ az storage blob service-properties update --account-name apimgmtportaljvwdemo --
 
 # This deploys the API from the 'App team' into the resource group of the 'API team' - so differs
 # a bit in the sense that a team typically deploys resources in their own resource groups.
-az deployment group create --resource-group api-mgmt-demos-apiteam --template-file './infra/distributed-tracing.bicep' --parameters uniqueness=jvw-demo
 
 
 az deployment group create --resource-group api-mgmt-demos-apiteam --template-file './infra/api-api.bicep' --parameters uniqueness=jvw-demo
