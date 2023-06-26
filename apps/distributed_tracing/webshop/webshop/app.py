@@ -17,6 +17,13 @@ from fastapi import FastAPI, Request, Form
 from fastapi.templating import Jinja2Templates
 import random
 import time
+from pydantic import BaseModel
+
+class Order(BaseModel):
+    item_id: int
+    price: float
+    quantity: int
+
 
 
 def raise_error_or_delay():
@@ -79,13 +86,16 @@ def get_shipments():
     return response.json()
 
 
+
+
 @app.post("/orders")
-def post_form(price: int = Form(...), item_id: int = Form(...), quantity: int = Form(...)):
+def post_form(order: Order):
     raise_error_or_delay()
+
     order = {
-        'item_id': item_id,
-        'price': price,
-        'quantity': quantity
+        'item_id': order.item_id,
+        'price': order.price,
+        'quantity': order.quantity
     }
     response = requests.post(Config.PAYMENTS_ENDPOINT +
                              "payments", data=json.dumps(order)).json()

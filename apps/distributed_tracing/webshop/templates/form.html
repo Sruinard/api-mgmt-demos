@@ -23,47 +23,31 @@ cfg: { // Application Insights Configuration
 </script>
 <script>
 
-
-
 function submit_order() {
-    var form_element = document.getElementById('orderform');
-    var body = {
-        item_id: document.getElementById('item_id').value,
-        price: document.getElementById('price').value,
-        quantity: document.getElementById('quantity').value
-    };
-    console.log(body)
-    var fd = new FormData();
-    fd.append('item_id', body.item_id);
-    fd.append('price', body.price);
-    fd.append('quantity', body.quantity);
-    document.getElementById('submitbtn').disabled = true;
+            var body = {
+                item_id: document.getElementById('item_id').value,
+                price: document.getElementById('price').value,
+                quantity: document.getElementById('quantity').value
+            };
+            console.log(body);
 
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'https://api-mgmt-team-apim-jvw-demo.azure-api.net/webshop/orders');
-    // xhr.setRequestHeader('Content-Type', 'application/json');
-    // xhr.send(JSON.stringify(body));
-    xhr.send(fd);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'https://api-mgmt-team-apim-jvw-demo.azure-api.net/webshop/orders');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(body));
 
-    xhr.onreadystatechange = function()
-    {
-        if(xhr.readyState == 4 && xhr.status == 200)
-        {
-            document.getElementById('submitbtn').disabled = false;
-            // var response = JSON.parse(xhr.responseText);
-            var response = xhr.responseText;
-            console.log(response);
-            if(response.success != '')
-            {
-                document.getElementById('orderform').reset();
-            }
-            else
-            {
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // var response = JSON.parse(xhr.responseText);
+                    var response = xhr.responseText;
+                    console.log(response);
+                    if (response.success != '') {
+                        document.getElementById('orderform').reset();
+                    } else {
+                    }
+                }
             }
         }
-    }
-}
-
 </script>
 </head>
 <body>
