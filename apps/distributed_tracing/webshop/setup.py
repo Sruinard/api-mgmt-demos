@@ -33,7 +33,7 @@ setup(
         "azure-monitor-opentelemetry-exporter",
         "opentelemetry-instrumentation-requests",
         "python-multipart",
-        "jinja2",
+        "jinja2==3.0.3",
         "asgiref"
     ],
     # this approach automatically finds out all directories (packages) - those must contain a file named __init__.py (can be empty)
