@@ -21,7 +21,7 @@ from pydantic import BaseModel
 
 class Order(BaseModel):
     item_id: int
-    price: float
+    price: int
     quantity: int
 
 
@@ -54,20 +54,20 @@ trace.set_tracer_provider(TracerProvider(
 tracer = trace.get_tracer(__name__)
 
 
-@app.on_event("startup")
-def startup_event():
-    # This line causes your calls made with the requests library to be tracked.
-    RequestsInstrumentor().instrument()
-    span_processor = BatchSpanProcessor(
-        AzureMonitorTraceExporter.from_connection_string(
-            Config.APPINSIGHTS_CONNECTION_STRING
-        )
-    )
-    trace.get_tracer_provider().add_span_processor(span_processor)
+# @app.on_event("startup")
+# def startup_event():
+#     # This line causes your calls made with the requests library to be tracked.
+#     RequestsInstrumentor().instrument()
+#     span_processor = BatchSpanProcessor(
+#         AzureMonitorTraceExporter.from_connection_string(
+#             Config.APPINSIGHTS_CONNECTION_STRING
+#         )
+#     )
+#     trace.get_tracer_provider().add_span_processor(span_processor)
 
-    RequestsInstrumentor().instrument()
-    FastAPIInstrumentor.instrument_app(
-        app, tracer_provider=trace.get_tracer_provider())
+#     RequestsInstrumentor().instrument()
+#     FastAPIInstrumentor.instrument_app(
+#         app, tracer_provider=trace.get_tracer_provider())
 
 
 @app.get("/")
@@ -76,7 +76,7 @@ async def get():
 
 
 @app.get("/orders")
-def post_form(request: Request):
+def order_site(request: Request):
     return templates.TemplateResponse('form.html', context={'request': request})
 
 
@@ -89,16 +89,17 @@ def get_shipments():
 
 
 @app.post("/orders")
-def post_form(order: Order):
+def add_order(order: Order):
     raise_error_or_delay()
 
-    order = {
+    order_to_add_to_payments = {
         'item_id': order.item_id,
         'price': order.price,
         'quantity': order.quantity
     }
+    data = json.dumps(order_to_add_to_payments)
     response = requests.post(Config.PAYMENTS_ENDPOINT +
-                             "payments", data=json.dumps(order)).json()
+                             "payments", data=data).json()
     return response
 
 
