@@ -18,7 +18,7 @@ setup(
     "gunicorn==20.0.4",
     "h11==0.12.0",
     "pydantic==1.6.2",
-    "starlette==0.13.6",
+    "starlette==0.14.2",
     "uvicorn==0.13.4",
     "uvloop==0.16.0",
     "websockets==9.1",
