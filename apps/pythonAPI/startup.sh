@@ -1,1 +1,1 @@
-gunicorn -w 4 -k uvicorn.workers.UvicornWorker payments.app:app
+python -m uvicorn payments.app:app --host 0.0.0.0
