@@ -21,7 +21,7 @@ from pydantic import BaseModel
 
 class Order(BaseModel):
     item_id: int
-    price: int
+    price: float
     quantity: int
 
 
@@ -93,13 +93,17 @@ def add_order(order: Order):
     raise_error_or_delay()
 
     order_to_add_to_payments = {
-        'item_id': order.item_id,
-        'price': order.price,
-        'quantity': order.quantity
+        "item_id": order.item_id,
+        "price": order.price,
+        "quantity": order.quantity
     }
     data = json.dumps(order_to_add_to_payments)
+    print(data)
     response = requests.post(Config.PAYMENTS_ENDPOINT +
-                             "payments", data=data).json()
+                             "payments", data=data,
+                             headers={"Content-Type": "application/json"}
+                             ).json()
+    print(response)
     return response
 
 

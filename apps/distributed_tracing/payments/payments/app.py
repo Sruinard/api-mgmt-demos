@@ -1,4 +1,5 @@
 import uvicorn
+import json
 import requests
 from azure.monitor.opentelemetry.exporter import AzureMonitorTraceExporter
 from dotenv import load_dotenv
@@ -72,9 +73,19 @@ async def get():
 @app.post("/payments")
 async def create_order(order: Order):
     raise_error_or_delay()
-    order_to_place = order.json()
+    # order_to_place = order.json()
+
+    order_to_place = {
+        "item_id": order.item_id,
+        "quantity": order.quantity,
+        "price": order.price
+    }
+
+    data = json.dumps(order_to_place)
     placed_order = requests.post(
-        Config.shipping_endpoint + "shipments", data=order_to_place).json()
+        Config.shipping_endpoint + "shipments", data=data,
+        headers={"Content-Type": "application/json"}
+        ).json()
     return placed_order
 
 
