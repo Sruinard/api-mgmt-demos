@@ -36,5 +36,9 @@ To obtain your credentials, run the following command:
 
 Make sure to copy the entire json and add it as a repository secret with a name of AZURE_CREDENTIALS.
 
+
+update apim backend in:
+[apps/distributed_tracing/webshop/templates/form.html](apps/distributed_tracing/webshop/templates/form.html)
+
 ## That's all!
 You are now ready to deploy. Run: ```$/bin/bash ./infra/infra-deploy.azcli``` or push your code and see github actions kick in.
