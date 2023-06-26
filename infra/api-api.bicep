@@ -1,7 +1,7 @@
 // multiline string doesnt support interpolation
 param uniqueness string = 'z9pqqf'
 
-var backend_policy_value = ' <policies> <inbound> <set-backend-service id="apim-generated-policy" backend-id="WebApp_api-app-api-python-graph-${uniqueness}" /> <base /> </inbound> <backend> <base /> </backend> <outbound> <base /> </outbound> <on-error> <base /> </on-error> </policies> '
+// var backend_policy_value = ' <policies> <inbound> <set-backend-service id="apim-generated-policy" backend-id="WebApp_api-app-api-python-graph-${uniqueness}" /> <base /> </inbound> <backend> <base /> </backend> <outbound> <base /> </outbound> <on-error> <base /> </on-error> </policies> '
 var webshopPolicy = '<policies> <inbound> <base /> <cors> <allowed-origins> <origin>*</origin> </allowed-origins> <allowed-methods preflight-result-max-age="300"> <method>GET</method> <method>POST</method> </allowed-methods> <allowed-headers> <header>*</header> </allowed-headers> <expose-headers> <header>*</header> </expose-headers> </cors> <set-backend-service base-url="https://api-app-api-python-${uniqueness}-webshop.azurewebsites.net" /> </inbound> <backend> <base /> </backend> <outbound> <base /> </outbound> <on-error> <base /> </on-error> </policies>'
 
 
@@ -99,51 +99,65 @@ resource webshopDiagnostics 'Microsoft.ApiManagement/service/apis/diagnostics@20
   }
 }
 
-resource graphqlapi 'Microsoft.ApiManagement/service/apis@2021-01-01-preview' = {
-  name: '${apimgmt.name}/GraphQLAPI'
-  properties: {
-    apiType: 'http'
-    description: 'Example GraphQL API'
-    isCurrent: true
-    path: ''
-    protocols: [
-      'https'
-    ]
-    displayName: 'graphQLAPI'
-    serviceUrl: apimgmt.properties.gatewayUrl
-    subscriptionRequired: false 
-  }
-}
+// resource graphqlapi 'Microsoft.ApiManagement/service/apis@2021-01-01-preview' = {
+//   name: '${apimgmt.name}/GraphQLAPI'
+//   properties: {
+//     apiType: 'http'
+//     description: 'Example GraphQL API'
+//     isCurrent: true
+//     path: ''
+//     protocols: [
+//       'https'
+//     ]
+//     displayName: 'graphQLAPI'
+//     serviceUrl: apimgmt.properties.gatewayUrl
+//     subscriptionRequired: false 
+//   }
+// }
 
 
-resource operations_get 'Microsoft.ApiManagement/service/apis/operations@2019-01-01' = {
-  name: '${graphqlapi.name}/graphqloperations_get'
-  properties: {
-    displayName: 'graphql_get'
-    method: 'GET'
-    urlTemplate: '/*'
-    templateParameters: []
-    responses: []
-  }
-}
+// resource operations_get 'Microsoft.ApiManagement/service/apis/operations@2019-01-01' = {
+//   name: '${graphqlapi.name}/graphqloperations_get'
+//   properties: {
+//     displayName: 'graphql_get'
+//     method: 'GET'
+//     urlTemplate: '/*'
+//     templateParameters: []
+//     responses: []
+//   }
+// }
 
-resource operations_post 'Microsoft.ApiManagement/service/apis/operations@2019-01-01' = {
-  name: '${graphqlapi.name}/graphqloperations_post'
-  properties: {
-    displayName: 'graphql_post'
-    method: 'POST'
-    urlTemplate: '/*'
-    responses: []
-    templateParameters: []
-  }
-}
+// resource operations_post 'Microsoft.ApiManagement/service/apis/operations@2019-01-01' = {
+//   name: '${graphqlapi.name}/graphqloperations_post'
+//   properties: {
+//     displayName: 'graphql_post'
+//     method: 'POST'
+//     urlTemplate: '/*'
+//     responses: []
+//     templateParameters: []
+//   }
+// }
 
-resource backend_policy 'Microsoft.ApiManagement/service/apis/policies@2021-01-01-preview' = {
-  name: '${graphqlapi.name}/policy'
-  properties: {
-    value: backend_policy_value
-  }
-}
+// resource backend_policy 'Microsoft.ApiManagement/service/apis/policies@2021-01-01-preview' = {
+//   name: '${graphqlapi.name}/policy'
+//   properties: {
+//     value: backend_policy_value
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // resource diagnosticsetting 'Microsoft.ApiManagement/service/apis/diagnostics@2021-01-01-preview' = {
 //   name: '${api1.name}/diagsetting'
