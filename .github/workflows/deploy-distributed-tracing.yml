@@ -37,7 +37,6 @@ jobs:
     - name: Upload to blob storage
       uses: azure/CLI@v1
       with:
-        azcliversion: 2.0.72
         inlineScript: |
             az storage blob upload-batch --account-name blobtracingsruinard --auth-mode key -d '$web' -s ./apps/distributed_tracing/webshop/templates
 
