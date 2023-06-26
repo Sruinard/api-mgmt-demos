@@ -5,10 +5,6 @@ resource appserviceplan 'Microsoft.Web/serverfarms@2021-01-15' existing =  {
   name: 'api-app-asp-${uniqueness}'
 }
 
-resource apimgmt 'Microsoft.ApiManagement/service@2021-01-01-preview' existing =  {
-  name: 'api-mgmt-team-apim-${uniqueness}'
-  scope: resourceGroup('api-mgmt-demos-apiteam')
-}
 
 resource appinsights 'Microsoft.Insights/components@2020-02-02' existing = {
   name: 'api-app-insights-${uniqueness}'

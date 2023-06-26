@@ -7,6 +7,8 @@ on:
   #     - main
 
 env:
+  STORAGE_ACCOUNT_NAME: blobtracingq56r36pfgksqq
+
   AZURE_PYTHON_WEBAPP_WEBSHOP: api-app-api-python-jvw-demo-webshop  
   AZURE_PYTHON_WEBAPP_PAYMENTS: api-app-api-python-jvw-demo-payments
   AZURE_PYTHON_WEBAPP_SHIPPING: api-app-api-python-jvw-demo-shipping 
@@ -38,7 +40,7 @@ jobs:
       uses: azure/CLI@v1
       with:
         inlineScript: |
-            az storage blob upload-batch --account-name blobtracingsruinard --auth-mode key -d '$web' -s ./apps/distributed_tracing/webshop/templates
+            az storage blob upload-batch --account-name ${{env.STORAGE_ACCOUNT_NAME}} --auth-mode key -d '$web' -s ./apps/distributed_tracing/webshop/templates
 
     - name: Set up Python 3.x
       uses: actions/setup-python@v2

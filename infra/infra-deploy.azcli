@@ -11,7 +11,7 @@ az group create --name api-mgmt-demos-apiteam --location westeurope
 # CHECK: 'uniqueness' - make this unique for your local
 az deployment group create --resource-group api-mgmt-demos-appteam --template-file './infra/api-apps.bicep' --parameters uniqueness=jvw-demo --mode Complete
 az deployment group create --resource-group api-mgmt-demos-apiteam --template-file './infra/api-mgmt.bicep' --parameters uniqueness=jvw-demo --mode Complete
-az deployment group create --resource-group api-mgmt-demos-appteam --template-file './infra/distributed-tracing.bicep' --parameters uniqueness=jvw-demo
+# az deployment group create --resource-group api-mgmt-demos-appteam --template-file './infra/distributed-tracing.bicep' --parameters uniqueness=jvw-demo
 
 # TODO: account-name should be takes as ouput variable from api-mgmt.bicep deployment file
 az storage blob service-properties update --account-name apimgmtportaljvwdemo --static-website --404-document error.htm --index-document index.htm
@@ -20,7 +20,7 @@ az storage blob service-properties update --account-name apimgmtportaljvwdemo --
 # a bit in the sense that a team typically deploys resources in their own resource groups.
 
 
-az deployment group create --resource-group api-mgmt-demos-apiteam --template-file './infra/api-api.bicep' --parameters uniqueness=jvw-demo
+# az deployment group create --resource-group api-mgmt-demos-apiteam --template-file './infra/api-api.bicep' --parameters uniqueness=jvw-demo
 
 
-az ad sp create-for-rbac --name apim-poc-team-automation --role contributor --scopes /subscriptions/5fcb0d36-846f-4721-86e9-47f6c43494fd --sdk-auth
+# az ad sp create-for-rbac --name apim-poc-team-automation --role contributor --scopes /subscriptions/5fcb0d36-846f-4721-86e9-47f6c43494fd --sdk-auth
